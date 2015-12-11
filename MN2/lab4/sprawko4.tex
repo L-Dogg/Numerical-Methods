@@ -1,0 +1,119 @@
+\documentclass[]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pgf,tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+%opening
+\let\normalint\int % PS
+\def\int{\displaystyle\normalint} %PS
+\title{\textbf{ Metody Numeryczne 2\\Laboratorium 4}\\
+Aproksymacja średniokwadratowa ciągła w przestrzeni $L_p^2(-1,1)$ dla $p(x)=\frac{1}{\sqrt{(1-x^2)}}$ w bazie wielomianów Czebyszewa. }
+\author{Szymon Adach}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Treść zadania}
+ \textbf{Zadanie 3:} Aproksymacja średniokwadratowa ciągła w przestrzeni $L_p^2(-1,1)$ dla $p(x)=\frac{1}{\sqrt{(1-x^2)}}$ w bazie wielomianów Czebyszewa. Całkowanie n-punktową kwadraturą Gaussa-Czebyszewa. Tablicowanie funkcji, przybliżenia i błędu w m~punktach przedziału [-1, 1] oraz obliczanie błędu średniokwadratowego w tych punktach.
+\section{Opis metody}
+Metoda aproksymacji średniokwadratowej ciągłej dla funkcji $f(x)$polega na znalezieniu współczynników $\alpha_0...\alpha_n$ takich, że:\\ $f^*(x)=\alpha_0 \cdot P_0(x)+\alpha_1 \cdot P_1(x)+...+\alpha_n\cdot P_n(x)$, gdzie $P_i(x)$ to i-ty wielomian z bazy wielomianów Czebyszewa. Znalezienie współczynników $\alpha_i$ sprowadza się do rozwiązania układu równań liniowych $G\cdot\alpha=F$, gdzie i-ty wiersz wektora $F$ ma postać $\int_{-1}^{1}f(x)p(x)dx$. Z kolei macierz $G$ zdefiniowana jest następująco: 
+\begin{center} $G = \frac{\pi}{2} \cdot
+\begin{bmatrix}
+2 &  &  & \\
+& 1 &  &\\
+& & 1 & \\
+& & & \ddots \\
+& & & & 1
+\end{bmatrix}$ 
+\end{center} 
+\newpage
+Całki w wektorze $F$ obliczane są za pomocą kwadaratury Gaussa-Czebyszewa:
+\begin{center}
+$\int_{-1}^{1}f(x)p(x)dx \approx \sum_{i=1}^{n}w_i\cdot f(x_i)$ \\
+\end{center}
+\begin{itemize}
+\item $x_i$ - i-te miejsce zerowe wielomianu Czebyszewa określone wzorem:\\
+$x_i=\cos(\frac{2i-1}{2n}\cdot \pi)$
+\item$w_i$ - waga dana wzorem:
+$w_i=\frac{\pi}{n}$\\
+\end{itemize}
+Wartości $f^*(x)=\alpha_0 \cdot P_0(x)+\alpha_1 \cdot P_1(x)+...+\alpha_n\cdot P_n(x)$ w punktach tablicowania obliczane są przy pomocy procedury \textbf{czebysz}, która korzysta ze wzoru:
+\begin{center}
+$P_n(x)=\frac{(x-\sqrt{x^2-1})^n+(x+\sqrt{x^2-1})^n}{2}$
+\end{center}
+Błąd średniokwadratowy obliczany jest ze wzoru:\\
+\begin{center}
+$e_sr=\sqrt{\frac{1}{n}\sum_{i=1}^{n}e_i^2}$ gdzie $e_i$ to błąd w i-tym punkcie tablicowania.
+\end{center} 
+\section{Działanie programu}
+
+Program jest uruchamiany poleceniem:
+\begin{center}
+	\textbf{aproksymacja(func, m, n)}
+\end{center} 
+\begin{itemize}
+	\item \textbf{func} - uchwyt do funkcji aproksymowanej
+	\item \textbf{m} - liczba punktów do tablicowania
+	\item \textbf{n} - liczba wielomianów Czebyszewa w bazie
+\end{itemize}
+Po wykonaniu obliczeń prezentowane są stablicowane wartości oraz wartość błędu średniokwadratowego w postaci:\\
+$x$ \hspace{5mm} $f(x)$ \hspace{5mm} $f^*(x)$ \hspace{5mm} $err(x)$\\
+Blad sredniokwadratowy: $e_sr$ \newpage
+\section{Przykłady}
+\begin{enumerate}
+\item \textbf{Wywołanie:}
+\verb|aproksymacja(@(x)x^6+5*x^5, 10, 6)|
+\\\textbf{Wyjście:}\\
+x\hspace{15mm}        f(x)\hspace{15mm}      f*(x)\hspace{13mm}     err(x)\\
+-1.00000\hspace{5mm}  -4.00000\hspace{5mm}  -4.03125\hspace{5mm}   0.03125\\
+-0.77778\hspace{5mm}  -1.20176\hspace{5mm}  -1.18324\hspace{5mm}   0.01852\\
+-0.55556\hspace{5mm}  -0.23521\hspace{5mm}  -0.26408\hspace{5mm}   0.02887\\
+-0.33333\hspace{5mm}  -0.01920\hspace{5mm}  -0.03331\hspace{5mm}   0.01410\\
+-0.11111\hspace{5mm}  -0.00008\hspace{5mm}   0.02445\hspace{5mm}   0.02453\\
+0.11111\hspace{5mm}   0.00009\hspace{6mm}   0.02462\hspace{7mm}   0.02453\\
+0.33333\hspace{5mm}   0.02195\hspace{6mm}   0.00784\hspace{7mm}   0.01410\\
+0.55556\hspace{5mm}   0.29401\hspace{6mm}   0.26514\hspace{7mm}   0.02887\\
+0.77778\hspace{5mm}   1.64452\hspace{6mm}   1.66304\hspace{7mm}   0.01852\\
+1.00000\hspace{5mm}   6.00000\hspace{6mm}   5.96875\hspace{7mm}   0.03125\\
+Blad sredniokwadratowy: 0.024306
+
+\item \textbf{Wywołanie:} \verb|aproksymacja(@(x)x^6+5*x^5, 10, 7)|
+\\\textbf{Wyjście:}
+    x\hspace{15mm}         f(x)\hspace{15mm}       f*(x)\hspace{15mm}      err(x)\\
+    -1.00000\hspace{5mm}  -4.00000\hspace{5mm}  -4.00000\hspace{5mm}   0.00000\\
+    -0.77778\hspace{5mm}  -1.20176\hspace{5mm}  -1.20176\hspace{5mm}   0.00000\\
+    -0.55556\hspace{5mm}  -0.23521\hspace{5mm}  -0.23521\hspace{5mm}   0.00000\\
+    -0.33333\hspace{5mm}  -0.01920 \hspace{3mm} -0.01920\hspace{6mm}   0.00000\\
+    -0.11111\hspace{5mm}  -0.00008\hspace{5mm}  -0.00008\hspace{5mm}   0.00000\\
+    0.11111 \hspace{5mm}  0.00009 \hspace{5mm}  0.00009 \hspace{5mm}  0.00000\\
+    0.33333 \hspace{5mm}  0.02195\hspace{7mm}   0.02195\hspace{5mm}   0.00000\\
+    0.55556 \hspace{5mm}  0.29401\hspace{7mm}   0.29401\hspace{5mm}   0.00000\\
+    0.77778 \hspace{5mm}  1.64452 \hspace{5mm}  1.64452\hspace{6mm}   0.00000\\
+    1.00000 \hspace{5mm}  6.00000 \hspace{5mm}  6.00000 \hspace{5mm}  0.00000\\
+    Blad sredniokwadratowy: 0.000000
+\item \textbf{Wywołanie:} \verb|aproksymacja(@cos, 10, 4)|
+\\\textbf{Wyjście:}\\
+x \hspace{15mm}        f(x)\hspace{15mm}       f*(x)\hspace{15mm}      err(x)\\
+-1.00000 \hspace{5mm}   0.54030 \hspace{5mm}   0.53539 \hspace{5mm}   0.00491\\
+-0.77778 \hspace{5mm}   0.71247 \hspace{5mm}   0.71697 \hspace{5mm}   0.00449\\
+-0.55556 \hspace{5mm}   0.84961 \hspace{5mm}   0.85315 \hspace{5mm}   0.00354\\
+-0.33333 \hspace{5mm}   0.94496 \hspace{5mm}   0.94394 \hspace{5mm}   0.00102\\
+-0.11111 \hspace{5mm}   0.99383 \hspace{5mm}   0.98933 \hspace{5mm}   0.00450\\
+0.11111  \hspace{6mm}  0.99383 \hspace{5mm}   0.98933 \hspace{5mm}   0.00450\\
+0.33333  \hspace{6mm}  0.94496 \hspace{5mm}   0.94394 \hspace{5mm}   0.00102\\
+0.55556  \hspace{6mm}  0.84961 \hspace{5mm}   0.85315 \hspace{5mm}   0.00354\\
+0.77778  \hspace{6mm}  0.71247 \hspace{5mm}   0.71697 \hspace{5mm}   0.00449\\
+1.00000  \hspace{6mm}  0.54030 \hspace{5mm}   0.53539 \hspace{5mm}   0.00491\\
+Blad sredniokwadratowy: 0.003954
+\end{enumerate}
+\end{document}

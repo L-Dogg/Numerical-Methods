@@ -1,0 +1,81 @@
+METODY NUMERYCZNE 2
+LABORATORIUM 1
+SPRAWOZDANIE
+
+Wyznaczanie zer wielomianów metodą stycznych z deflacją czynnikiem liniowym
+
+1. Treść zadania
+Zadanie 12: Wyznaczenie wszystkich zer wielomianów metodą stycznych w dziedzienie rzeczywistej. Po wyznaczeniu koljnego zera należy dokonać deflacji czynnikiem liniowym.
+
+2. Opis metody
+Zadanie można podzielić na następujące podproblemy:
+a. Obliczenie wartości wielomianu i jego pochodnej w punkcie.
+	W tym celu wykorzystano algorytm Hornera.
+b. Wyszukanie pierwiastka wielomianu.
+	Zgodnie z poleceniem wykorzystano metodę Newtona. W celu zapewnienia poprawnego wykonania programu, maksymalna liczba iteracji została ustalona na MAX_ITER = 30; ponadto aby uniknąć
+	dzielenia przez zero, jeżeli wartość pierwszej pochodnej jest równa zero, jest ona zaburzana poprzez dodanie 0.012. Za punkt startowy metody obrano x = 0;
+
+	Wzór na zero x wielomianu W:
+	x := x- W(x)/W'(x)
+
+	Warunkiem stopu metody jest przekroczenie maksymalnej liczby iteracji lub |W'(x)| <= err gdzie err jest ustaloną stałą równą (1e6 * eps) = 2.2204e-10.
+c. Dzielenie wielomianu przez dwumian
+	W tym celu wykorzystano algorytm Hornera
+d. Wyznaczenie wszystkich zer (dane wejściowe: wielomian W i opcjonalnie punkt startowy a)
+	i) Dopóki liczba iteracji jest mniejsza od deg(W), startując z a wyszukaj metodą stycznych pierwiastek x0 wielomianu. 
+	ii) Podziel wielomian W przez dwumian (x-x0), W(x) := W(x) / (x-x0)
+	iii) Niech a = x0. Wróć do i)
+
+Jeżeli nie znaleziono zer, to program zwraca pusty wektor []. W przeciwnym przypadku zwracany jest wektor z zerami wielomianu - zera wielokrotne pojawiają się odpowiednią ilośc razy.
+
+3. Działanie programu
+Program został napisany w MATLABie, składa się z 4 plików i jest uruchamiany poleceniem find_zeroes(poly, start) gdzie poly to wektor współczynników (podawanych od najniższej potęgi),
+a start to argument opcjonalny - punkt startowy metody.
+
+4. Przykłady
+a.
+	W(x) = (x-sqrt2)(x+sqrt2)(x-sqrt3)(x+sqrt3)
+	x0 = 0
+
+	Wyjście:
+	-1.7321   -1.4142    1.4142    1.7321
+
+	Komentarz:
+	Punkt startowy w punkcie zerowania pierwszej pochodnej, pierwiastki rozłożone symetrycznie względem punktu startowego.
+b.
+	W(x) = x^4 + 3x^3 + 3x^2 + 2x + 4
+	x0 = 0
+
+	Wyjście
+	[]
+
+	Komentarz:
+	Wielomian, który nie ma zer rzeczywistych.
+c. 
+	W(x) = x^4
+	x0 = 0
+
+	Wyjście:
+     0     0     0     0
+
+     Komentarz:
+     Poczwórne zero wielomianu, podczas deflacji powstają błędy.
+d.
+	W(x) = (x-1)^3 * (x+1)
+	x0 = 0
+
+	Wyjście:
+	0.999709367039642   1.003572973256412   0.996711743886779  -0.999994084182832
+
+	Komentarz:
+	(wykres) Wykres wielomianu że jest spłaszczony w okolicach x=1, więc metoda daje niedokładne wyniki.
+
+e. 
+	W(x) = -1231.23 + 53453x + 333x^2 - 15x^3
+	x0 = 0
+
+	Wyjście:
+	0.023030579340882 -49.632175488307347  71.809144908966474
+
+	Komentarz:
+	Duży zakres współczynników oraz duży zakres zer wielomianu.
