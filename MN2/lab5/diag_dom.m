@@ -1,7 +1,8 @@
 function x = diag_dom( A )
 %DIAG_DOM - funkcja sprawdzaj¹ca czy macierz jest
 %           silnie diagonalnie dominuj¹ca
-%           Zwraca 1 jeœli jest
+%           Zwraca 1 jeœli jest diag_dom
+%           Zwraca 0 wpp
 
 A = abs(A);
 [n, ~] = size(A);

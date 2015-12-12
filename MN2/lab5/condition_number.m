@@ -29,7 +29,7 @@ for k = 1:n
     lambda_min = 1/dot(y_k, x_0) + lambda_x;
     x_0 = y_k/norm(y_k);
 end
-fprintf('Lambda_min = %f\nLambda_max=%f\ncond_2(A)=%f\n',...
+fprintf('Lambda_min = %f\nLambda_max = %f\ncond_2(A) = %f\n',...
     lambda_min, lambda_max, lambda_max/lambda_min);
 end
 
