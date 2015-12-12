@@ -1,4 +1,4 @@
-function cnd = condition_number(A, e)
+function cnd = condition_number(A, n)
 %CONDITION_NUMBER - obliczanie wskaznika uwarunkowania macierzy A=A^T i
 %diagonalnie silnie dominujacej. Do obliczenia lambda_max nalezy zastosowac
 %zwykla metode potegowa, a do obliczenia lambda_min odwrotna metode
@@ -6,18 +6,26 @@ function cnd = condition_number(A, e)
 %Jacobiego.
 %Argumenty:
 %          A - macierz (diagonalnie silnie dominujaca, A=A^T)
-%          e - dokladnosc
+%          n - liczba iteracji
 
+%Prosta metoda potegowa:
 x_0 = randi(30, length(A), 1); %losowy wektor poczatkowy
 x_0 = x_0/norm(x_0);
-x_1 = x_0;
-i = 1;
-while(max(abs(x_1-x_0)) >= e)
-    x_0=x_1;
-    x_1 = A*x_0;
-    x_1 = x_1/norm(x_1);
+
+for k = 1:n
+    x_0 = A*x_0;
+    x_0 = x_0/norm(x_0);
 end
-lambda_max = max(max((A*x_1)/x_1));
-disp(lambda_max)
+lambda_max = dot(A*x_0, x_0)/norm(x_0);
+
+%Odwrotna metoda potegowa:
+x_0 = randi(30, length(A), 1);
+lambda_p = 1;
+for k = 1:n
+    y_k = Jacobi(A-eye(length(A), x_0, 0.001);
+    lambda_p = 1/dot(y_k, x_0) + lambda_p;
+    x_0 = y_k/norm(y_k);
+end
+fprintf('Lambda_min = %f\nLambda_max=
 end
 
