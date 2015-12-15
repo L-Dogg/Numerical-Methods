@@ -25,7 +25,7 @@ lambda_x = rand();
 C = A-eye(length(A))*lambda_x;
 
 for k = 1:n
-    y_k = Jacobi2(C, x_0, 0.001);
+    y_k = Jacobi2(C, x_0, e);
     lambda_min = 1/dot(y_k, x_0) + lambda_x;
     x_0 = y_k/norm(y_k);
 end

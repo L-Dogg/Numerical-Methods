@@ -9,16 +9,17 @@ A = abs(A);
 x = 1;
 y = 1;
 for k=1:n 
-    if sum(A(k, :)) / A(k,k) >= 2
+    if sum(A(k, :)) / A(k,k) >= 2   %W wierszu
         x = 0;
         break;
     end
     
-    if sum(A(:, k)) / A(k,k) >= 2
+    if sum(A(:, k)) / A(k,k) >= 2   %W kolumnie
         y = 0;
+        break;
     end
 end
-if(y == 1 || x == 1)
+if(y == 1 && x == 1)
     x = 1;
 end
 end

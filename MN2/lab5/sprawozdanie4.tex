@@ -82,11 +82,33 @@ $A = \begin{bmatrix}
 \verb|cond_2(A) = 2.091610|\\
 \textbf{eig(A)} =  2.5858 4.0000 5.4142\\
 \textbf{Obserwacja:} Dla tego problemu podobny wpływ na dokładność programu ma zwiększenie liczby iteracji oraz zmniejszenie dopuszczalnego błędu metody Jacobiego.
-\item \textbf{Wywołanie:} \verb|aproksymacja(@(x)x^6+5*x^5, 10, 7)|
-\\\textbf{Wyjście:}
-    
-\item \textbf{Wywołanie:} \verb|aproksymacja(@cos, 10, 4)|
-\\\textbf{Wyjście:}\\
 
+\item \textbf{Wywołanie:}\\
+$A = \begin{bmatrix}
+8 & 3 & 2\\
+3 & 9 & 1\\
+2 & 1 & 4
+\end{bmatrix}$\\
+\verb|condition_number(A, 1000, 0.0001)|
+\\\textbf{Wyjście:}\\
+\verb|Lambda_min = 3.159160|\\
+\verb|Lambda_max = 12.072603|\\
+\verb|cond_2(A) = 3.821460|\\
+\textbf{eig(A)} =  3.159273139447023 5.768124085466175 12.072602775086800\\
+
+\item \textbf{Wywołanie:}\\
+$A = \begin{bmatrix*}[r]
+    10 &    2  &  -2 &    3\\
+    2   & -8   &  1  &  -4\\
+    -2 &    1&     7  &  -1\\
+    3 &   -4  &  -1  & -15
+\end{bmatrix*}$\\
+\verb|condition_number(A, 100000, 0.00001)|
+\\\textbf{Wyjście:}\\
+\verb|Lambda_min = 6.220290|\\
+\verb|Lambda_max = -17.281854|\\
+\verb|cond_2(A) = -2.778304|\\
+\textbf{eig(A)} =   -17.281853841873332 -6.352788379417891\\ 6.220274282228035 11.414367939063178\\
+\textbf{Obserwacja:} Prezentowana metoda znajduje wartości własne najmniejsze i największe co do modułu, zatem obliczony wskaźnik uwarunkowania w pewnych przypadkach nie być poprawny.
 \end{enumerate}
 \end{document}
