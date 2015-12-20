@@ -1,4 +1,4 @@
-function RK3(f, a, b, n, y_a)
+function y = RK3(f, a, b, n, y_a)
 %RK3 - metoda Rungego-Kutty rzedu 3-ego(alfa=1, Beta = 1/2) 
 %      dla rownania y'=f(x,y)
 %Argumenty:
@@ -12,12 +12,11 @@ function RK3(f, a, b, n, y_a)
 
 alfa = 1;
 beta = 1/2;
-r = 3;
 
 h = (b-a)/n;
 x = linspace(a, b, n+1);
 y = zeros(1, length(x));
-y(1) = y_a;         %Warunek poczatkowy
+y(1) = y_a;
 
 coef = [1+ (2-3*(alfa+beta))/(6*alfa*beta),0,0;...
     (3*beta-2)/(6*alfa*(beta-alfa)), alfa, 0;...
@@ -34,7 +33,7 @@ for m = 2:length(x)
     y(m) = y(m-1) + 1/6 * h * (k(1) + 4*k(2) + k(3));
 end
 
-plot(x, y);
+%plot(x, y);
 
 end
 
