@@ -7,8 +7,8 @@ function test_rk3ode(s, n)
 %  z'=-2y-z  z(0)=1
 %2)y'=y+5z   y(0)=2
 %  z'=-y-3z  z(0)=1
-%3)y'=2y     y(0)=2
-%  z'=y*z^2  z(0)=-0.18556125259086278268524173840442697991712035885370
+%3)y'=2y     y(1)=2
+%  z'=y*z^2  z(1)=-0.18556125259086278268524173840442697991712035885370
 switch s
     case 1
         %y(x)= e^(-x) * (2x+1)
@@ -33,7 +33,7 @@ switch s
         u = @(x) exp(2.*x) .* 2;
         w = @(x) 1 ./(2.-exp(2.*x)); 
 end
-
+fprintf('Max blad y(x)=%f\nMax blad z(x)=%f\n', max(abs(y-u(x))), max(abs(z-w(x))));
 f = figure('name', 'y(x)', 'NumberTitle','off');
 hold on;
 plot(x, y, 'g');

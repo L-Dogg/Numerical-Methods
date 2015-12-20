@@ -7,7 +7,7 @@ function [y,z] = RK3ODE(f, g, a, b, n, y_a, z_a)
 %   a, b - poczatek i koniec przedzialu
 %   n    - liczba wezlow
 %   y_a  - warunek poczatkowy y(a) = y_a
-%   z_a  - warunek pocz?tkowy z(a) = z_a
+%   z_a  - warunek poczatkowy z(a) = z_a
 
 
 %      y'(x) = f(x,y(x),z(x))
