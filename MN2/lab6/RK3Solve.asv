@@ -1,0 +1,9 @@
+function RK3Solve(A, c, a, b, n, y_a)
+%RK3Solve - metoda Rungego-Kutty rzedu trzeciego dla ukladu dwoch rownan
+%Argumenty:
+%   A - macierz ukladu
+%   c - kolumna wyrazow wolnych
+%   a, b - poczatek i k
+
+end
+
