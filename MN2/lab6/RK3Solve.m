@@ -11,7 +11,8 @@ function RK3Solve(A, c, a, b, n, y_a1, y_a2)
 pom = [1,1]';
 X = GEPP(A|pom);
 y2 = RK(pom(2) / X(2,2) * c(2), a, b, n, y_a1);
-y1 = RK((pom(1) - X(1,2) / X(2,2) * pom(2)) * c(1), a, b, n, y_a2);
+g = @(x,y) (pom(1) * c(1)) - ((X(1,2) / X(2,2)) * pom(2) * c(2));
+y1 = RK(g, a, b, n, y_a2);
 x = linspace(a, b, n+1);
 
 plot(x, y1);
