@@ -1,7 +1,7 @@
 function test_rk3ode(s, n)
 %testRK3ODE - testuje funkcje RK3ODE na rozwiazanych przykladach
 %Argumenty:
-%         s - liczba 1, 2, 3 czyli numer przykladu
+%         s - liczba 1, 2, 3, 4 czyli numer przykladu
 %         n - liczba wezlow
 %1)y'=z      y(0)=1
 %  z'=-2y-z  z(0)=1
@@ -9,6 +9,8 @@ function test_rk3ode(s, n)
 %  z'=-y-3z  z(0)=1
 %3)y'=2y     y(1)=2
 %  z'=y*z^2  z(1)=-0.18556125259086278268524173840442697991712035885370
+%4)y'=1/(1+z)+sin(y)-1/(1+e^x)-sin(x)+1
+%  z'=cos(y+z)+e^x-cos(x+e^x)
 switch s
     case 1
         %y(x)= e^(-x) * (2x+1)
@@ -32,6 +34,13 @@ switch s
         x = linspace(1, 11, n+1);
         u = @(x) exp(2.*x) .* 2;
         w = @(x) 1 ./(2.-exp(2.*x)); 
+    case 4
+        %y(x)=x
+        %z(x)=e^x
+        [y,z]=RK3ODE(@(x,y,z)1/(1+z)+sin(y)-1/(1+exp(x))-sin(x)+1, @(x,y,z)cos(y+z)+ exp(x)-cos(x+exp(x)), 1, 5, n, 1, exp(1));
+        x = linspace(1, 5, n+1);
+        u = @(x) x;
+        w = @(x) exp(x);
 end
 fprintf('Max blad y(x)=%f\nMax blad z(x)=%f\n', max(abs(y-u(x))), max(abs(z-w(x))));
 f = figure('name', 'y(x)', 'NumberTitle','off');

@@ -1,7 +1,8 @@
 function [y,z] = RK3ODE(f, g, a, b, n, y_a, z_a)
-%RK3 - metoda Rungego-Kutty rzedu 3-ego(alfa=1, Beta = 1/2) 
+%RK3ODE - metoda Rungego-Kutty rzedu 3-ego(alfa=1, Beta = 1/2) 
 %      dla rownania y'=f(x,y)
 %Argumenty:
+%RK3ODE(f, g, a, b, n, y_a, z_a)
 %   f    - uchwyt do funkcji f(x,y,z)
 %   g    - uchwyt do funkcji g(x,y,z)
 %   a, b - poczatek i koniec przedzialu

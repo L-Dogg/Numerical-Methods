@@ -148,5 +148,19 @@ $(a,b] = (1,11]$
 	\includegraphics[scale=0.8]{y3.png}\\
 	\includegraphics[scale=0.8]{z3.png}
 \end{center}
+\newpage
+\item \textbf{Wywołanie:}\\
+$y'=\frac{1}{1+z}+sin(y)-\frac{1}{1+e^x}-sin(x)+1$,\hspace{7mm}      $y(1)=1$\\
+$z'=cos(y+z)+e^x-cos(x+e^x)$,\hspace{13.5mm}   $z(1)=e$\\
+$(a,b] = (1,5]$
+\verb|test_rk3ode(4, 50)|
+\\\textbf{Wyjście:}\\
+\verb|Max blad y(x)=0.000815|\\
+\verb|Max blad z(x)=2.949982|\\
+\textbf{Rozwiązanie dokładne:}\\ $y(x)= x$,\\ $z(x)=e^{x}$
+\begin{center}
+	\includegraphics[scale=0.8]{y4.png}\\
+	\includegraphics[scale=0.8]{z4.png}
+\end{center}
 \end{enumerate}
 \end{document}
